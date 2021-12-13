@@ -1,0 +1,23 @@
+GET http://localhost:3000/accounts
+
+###
+GET http://localhost:3000/accounts/2d731aa4-0d33-4d61-ba37-768468b8ebcc
+
+###
+POST http://localhost:3000/accounts
+Content-Type: application/json
+
+{
+  "name": "igor"
+}
+
+###
+PATCH  http://localhost:3000/accounts/8a3ce573-5282-4042-b60c-3fbd3539eb0d
+Content-Type: application/json
+
+{
+  "igor": "gregori"
+}
+
+###
+DELETE  http://localhost:3000/accounts/8a3ce573-5282-4042-b60c-3fbd3539eb0d

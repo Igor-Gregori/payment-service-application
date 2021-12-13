@@ -1,0 +1,28 @@
+GET http://localhost:3000/orders
+x-token: ymabkdx0xvr
+
+###
+GET http://localhost:3000/orders/8a3ce573-5282-4042-b60c-3fbd3539eb0d
+
+###
+POST http://localhost:3000/orders
+Content-Type: application/json
+x-token: ymabkdx0xvr
+
+{
+  "amount": 30.00,
+  "credit_card_number": "1234",
+  "credit_card_name": "any name"
+}
+
+###
+PATCH  http://localhost:3000/orders/8a3ce573-5282-4042-b60c-3fbd3539eb0d
+Content-Type: application/json
+
+{
+  "amount": 50.00,
+  "credit_card_number": "4321"
+}
+
+###
+DELETE  http://localhost:3000/orders/8a3ce573-5282-4042-b60c-3fbd3539eb0d
