@@ -1,13 +1,14 @@
 GET http://localhost:3000/orders
-x-token: ymabkdx0xvr
+x-token: y0d26foxuqc
 
 ###
-GET http://localhost:3000/orders/8a3ce573-5282-4042-b60c-3fbd3539eb0d
+GET http://localhost:3000/orders/690222e2-24ff-41a8-a20f-576618a05537
+x-token: y0d26foxuqc
 
 ###
 POST http://localhost:3000/orders
 Content-Type: application/json
-x-token: ymabkdx0xvr
+x-token: y0d26foxuqc
 
 {
   "amount": 30.00,

@@ -1,7 +1,7 @@
 GET http://localhost:3000/accounts
 
 ###
-GET http://localhost:3000/accounts/2d731aa4-0d33-4d61-ba37-768468b8ebcc
+GET http://localhost:3000/accounts/9cc86b2c-1705-41c2-ae09-211ab47ee10c
 
 ###
 POST http://localhost:3000/accounts
