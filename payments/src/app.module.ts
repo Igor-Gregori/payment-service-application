@@ -12,7 +12,6 @@ import { ConfigModule } from '@nestjs/config';
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    OrdersModule,
     SequelizeModule.forRoot({
       dialect: process.env.DB_CONNECTION as any,
       host: process.env.DB_HOST,
@@ -28,15 +27,16 @@ import { ConfigModule } from '@nestjs/config';
       },
     }),
     // SequelizeModule.forRoot({
-    //   dialect: 'sqlite',
-    //   host: join(__dirname, 'database.sqlite'),
-    //   autoLoadModels: true,
-    //   models: [Order, Account],
-    //   sync: {
-    //     alter: true,
-    //     // force: true        
-    //   }
-    // }),
+      //   dialect: 'sqlite',
+      //   host: join(__dirname, 'database.sqlite'),
+      //   autoLoadModels: true,
+      //   models: [Order, Account],
+      //   sync: {
+        //     alter: true,
+        //     // force: true        
+        //   }
+        // }),
+    OrdersModule,
     AccountsModule
   ],
   controllers: [AppController],
