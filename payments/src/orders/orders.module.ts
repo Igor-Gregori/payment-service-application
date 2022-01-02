@@ -13,12 +13,12 @@ import { ClientKafka, ClientsModule, Transport } from '@nestjs/microservices';
     ]),
     AccountsModule,
     ClientsModule.registerAsync([
-      {        
+      {
         name: 'KAFKA_SERVICE',
         useFactory: () => ({
           transport: Transport.KAFKA,
           options: {
-            client:  {
+            client: {
               clientId: process.env.KAFKA_CLIENT_ID,
               brokers: [process.env.KAFKA_HOST],
               ssl: process.env.KAFKA_USE_SSL === 'true'
@@ -27,7 +27,7 @@ import { ClientKafka, ClientsModule, Transport } from '@nestjs/microservices';
               groupId: process.env.KAFKA_CONSUMER_GROUP_ID
             }
           }
-        })        
+        })
       }
     ])
   ],

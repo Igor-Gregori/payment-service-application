@@ -4,6 +4,8 @@ import (
 	"github.com/igor-gregori/imersao5-gateway/adapter/broker"
 	"github.com/igor-gregori/imersao5-gateway/domain/entity"
 	"github.com/igor-gregori/imersao5-gateway/domain/repository"
+
+	"fmt"
 )
 
 type ProcessTransaction struct {
@@ -21,6 +23,7 @@ func (p *ProcessTransaction) Execute(input TransactionDtoInput) (TransactionDtoO
 	transaction.ID = input.ID
 	transaction.AccountID = input.AccountID
 	transaction.Amount = input.Amount
+	fmt.Println("💳 processando transação do cartão ", input.CreditCardNumber)
 	cc, invalidCC := entity.NewCreditCard(input.CreditCardNumber, input.CreditCardName, input.CreditCardExpirationMonth, input.CreditCardExpirationYear, input.CreditCardCVV)
 	if invalidCC != nil {
 		return p.rejectTransaction(transaction, invalidCC)
@@ -32,7 +35,6 @@ func (p *ProcessTransaction) Execute(input TransactionDtoInput) (TransactionDtoO
 	}
 
 	return p.approveTransaction(input, transaction)
-
 }
 
 func (p *ProcessTransaction) approveTransaction(input TransactionDtoInput, transaction *entity.Transaction) (TransactionDtoOutput, error) {
