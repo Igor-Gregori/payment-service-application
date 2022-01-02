@@ -26,7 +26,16 @@ export class OrdersService {
       messages: [
         {
           key: 'transactions',
-          value: JSON.stringify(order)
+          value: JSON.stringify({
+            id: order.id,
+            account_id: order.account_id,
+            credit_card_number: order.credit_card_number,
+            credit_card_name: order.credit_card_name,
+            credit_card_expiration_month: (createOrderDto as any).credit_card_expiration_month,
+            credit_card_expiration_year: (createOrderDto as any).credit_card_expiration_year,
+            credit_card_expiration_cvv: (createOrderDto as any).credit_card_cvv,
+            amount: order.amount
+          })
         }
       ]
     })
@@ -41,7 +50,7 @@ export class OrdersService {
     });
   }
 
-  findOne(id: string) {
+  findOneByAccountId(id: string) {
     return this.orderModule.findOne({
       where: {
         id,
@@ -53,14 +62,20 @@ export class OrdersService {
     });
   }
 
+  findOne(id: string) {
+    return this.orderModule.findByPk(id);
+  }
+
   async update(id: string, updateOrderDto: UpdateOrderDto) {
-    const order = await this.orderModule.findByPk(id);
+    // const account = this.accountStorage.account;
+    // const order = await (account ? this.findOneByAccountId(id) : this.findOne(id));
+    const order = await this.findOne(id)
     return order.update(updateOrderDto);
   }
 
   @HttpCode(204)
   async remove(id: string) {
-    const order = await this.orderModule.findByPk(id);
+    const order = await this.findOneByAccountId(id);
     return order.destroy();
   }
 }

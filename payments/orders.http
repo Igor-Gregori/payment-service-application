@@ -2,7 +2,7 @@ GET http://localhost:3000/orders
 x-token: viand5508g
 
 ###
-GET http://localhost:3000/orders/690222e2-24ff-41a8-a20f-576618a05537
+GET http://localhost:3000/orders/caae515b-0d8d-4097-b7ec-df0c1ddab3d9
 x-token: viand5508g
 
 ###
@@ -11,9 +11,12 @@ Content-Type: application/json
 x-token: viand5508g
 
 {
-  "amount": 30.00,
-  "credit_card_number": "1234",
-  "credit_card_name": "any name"
+  "amount": 130.00,
+  "credit_card_number": "5244263055248800",
+  "credit_card_name": "MARIA JOAQUINA",
+  "credit_card_expiration_month": 12,
+  "credit_card_expiration_year": 2022,
+  "credit_card_cvv": "123"
 }
 
 ###
