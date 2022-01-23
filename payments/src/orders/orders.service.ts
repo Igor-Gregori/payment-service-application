@@ -14,12 +14,13 @@ export class OrdersService {
     private orderModule: typeof Order,
     private accountStorage: AccountStorageService,
     @Inject('KAFKA_PRODUCER')
-    private kafkaProducer: Producer) { }
+    private kafkaProducer: Producer,
+  ) {}
 
   async create(createOrderDto: CreateOrderDto) {
     const order = await this.orderModule.create({
       ...createOrderDto,
-      account_id: this.accountStorage.account.id
+      account_id: this.accountStorage.account.id,
     });
     this.kafkaProducer.send({
       topic: 'transactions',
@@ -31,22 +32,24 @@ export class OrdersService {
             account_id: order.account_id,
             credit_card_number: order.credit_card_number,
             credit_card_name: order.credit_card_name,
-            credit_card_expiration_month: (createOrderDto as any).credit_card_expiration_month,
-            credit_card_expiration_year: (createOrderDto as any).credit_card_expiration_year,
+            credit_card_expiration_month: (createOrderDto as any)
+              .credit_card_expiration_month,
+            credit_card_expiration_year: (createOrderDto as any)
+              .credit_card_expiration_year,
             credit_card_expiration_cvv: (createOrderDto as any).credit_card_cvv,
-            amount: order.amount
-          })
-        }
-      ]
-    })
+            amount: order.amount,
+          }),
+        },
+      ],
+    });
     return order;
   }
 
   findAll() {
     return this.orderModule.findAll({
       where: {
-        account_id: this.accountStorage.account.id
-      }
+        account_id: this.accountStorage.account.id,
+      },
     });
   }
 
@@ -54,11 +57,9 @@ export class OrdersService {
     return this.orderModule.findOne({
       where: {
         id,
-        account_id: this.accountStorage.account.id
+        account_id: this.accountStorage.account.id,
       },
-      rejectOnEmpty: new EmptyResultError(
-        `Order with ID ${id} not found`
-      )
+      rejectOnEmpty: new EmptyResultError(`Order with ID ${id} not found`),
     });
   }
 
@@ -69,7 +70,7 @@ export class OrdersService {
   async update(id: string, updateOrderDto: UpdateOrderDto) {
     // const account = this.accountStorage.account;
     // const order = await (account ? this.findOneByAccountId(id) : this.findOne(id));
-    const order = await this.findOne(id)
+    const order = await this.findOne(id);
     return order.update(updateOrderDto);
   }
 
